@@ -25,12 +25,15 @@ module.exports = {
     
         try {
           const user = await userModel.getUserByEmail(email);
-    
+          
+          console.log("User fetched in login :", user); 
           if (!user) {
             return res.status(404).json({ message: "user not found....." });
           }
     
-          const passwordMatch = await bcrypt.compare(password + "", user.password);
+          console.log("Password:", password);      
+          console.log("User password:", user.password);
+          const passwordMatch = await bcrypt.compare(password, user.password);
     
           if (!passwordMatch) {
             return res.status(401).json({ message: "Authentication failed" });
@@ -39,7 +42,7 @@ module.exports = {
           const accessToken = jwt.sign(
             { userid: user.id, email: user.email },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "1d" }
+            { expiresIn: "1h" }
           );
     
           /** set token in httpOnly cookie */

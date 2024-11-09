@@ -60,22 +60,7 @@ module.exports = {
       throw error;
     }
   },
-
-  getUserByEmail: async (email) => {
-    try {
-      const user = await db("authusers")
-        .select("id", "name", "surname", "username", "email")
-        .where({ email })
-        .first();
-
-      console.log("User fetched by email:", user); // Log for debugging
-      return user;
-    } catch (error) {
-      console.error("Error fetching user by email:", error);
-      throw error;
-    }
-  },
-
+  
   getUserByUsername: async (username = "") => {
     try {
       return await db("authusers")

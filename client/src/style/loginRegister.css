@@ -1,0 +1,81 @@
+/* Container for the split layout */
+.login-register-container {
+    display: flex;
+    height: 100vh;
+    background-color: #e0f7e0; /* Light green background */
+  }
+  
+  .form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #88af88; /* Light green background */
+  }
+
+  .form-wrapper {
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #e5fde4;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  form-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: darkgreen;
+  }
+
+  .form-input {
+    width: 100%;
+    margin-bottom: 16px;
+    
+  }
+  
+  .form-input {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 18px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: darkgreen;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 16px
+  }
+
+  .btn:hover {
+    background-color: green;
+  }
+  
+  /* Toggle Link */
+  .toggle-button {
+    margin-top: 10px;
+    color: darkgreen;
+    cursor: pointer;
+  }
+  
+  .toggle-button:hover {
+    text-decoration: underline;
+  }
+  
+  /* Right side for background image, 50% width */
+  .background-image {
+    flex: 1;
+    background-image: url('../img/photo.jpg'); /* Replace with actual JPEG image path */
+    background-size: cover;
+    background-position: center;
+  }

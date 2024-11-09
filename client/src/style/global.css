@@ -1,0 +1,39 @@
+/* Base styles for the entire application */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #e0f7e0; /* Light green for entire background */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Basic reset for all elements */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Styles for all buttons */
+  button, .btn {
+    background-color: rgb(31, 129, 31);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover, .btn:hover {
+    background-color: rgb(10, 175, 10);
+  }
+  
+  /* Links */
+  a {
+    color: darkgreen;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField, Box } from "@mui/material";
+import { Button, TextField, Box, Typography } from "@mui/material";
+import "../style/global.css";
+import "../style/LoginRegister.css";
 
 import { AuthContext } from "../App";
 
-const LoginRegister = ({ mode }) => {
+const LoginRegister = ({initialMode = "Login" }) => {
+  const [mode, setMode] = useState(initialMode);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -17,7 +20,8 @@ const LoginRegister = ({ mode }) => {
   const navigate = useNavigate();
 
 
-  const loginregister = async () => {
+  const loginregister = async (e) => {
+    e.preventDefault();
     if (mode === "Login") {
       try {
         const response = await axios.post(
@@ -37,7 +41,7 @@ const LoginRegister = ({ mode }) => {
           console.log("Token received:", response.data.accessToken);
           
           localStorage.setItem("authToken", response.data.accessToken)
-          navigate("/");
+          navigate("/profile");
         }
       } catch (error) {
         console.log(error);
@@ -69,56 +73,41 @@ const LoginRegister = ({ mode }) => {
   };
 
   return (
-    <>
-      <h2>{mode}</h2>
-      <Box component={"form"} sx={{ m: 1 }} noValidate autoComplete='off'>
-      {mode === "Register" && (
-          <>
-            <TextField
-              sx={{ m: 1 }}
-              id="name"
-              label="Enter your name..."
-              variant="outlined"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-              sx={{ m: 1 }}
-              id="surname"
-              label="Enter your surname..."
-              variant="outlined"
-              onChange={(e) => setSurname(e.target.value)}
-            />
-            <TextField
-              sx={{ m: 1 }}
-              id="username"
-              label="Enter your username..."
-              variant="outlined"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </>
-        )}
-        <TextField
-          sx={{ m: 1 }}
-          id="email"
-          type="email"
-          label="Enter your email..."
-          variant="outlined"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          sx={{ m: 1 }}
-          id="password"
-          type="password"
-          label="Enter your password..."
-          variant="outlined"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Box>
-      <Button variant="contained" onClick={loginregister}>
-        {mode}
-      </Button>
-      <div>{message}</div>
-    </>
+    <div className="login-register-container">
+      <div className="form-container">
+        <div className="form-wrapper">
+          <Typography variant="h4" className="form-title">
+            {mode === "Login" ? "Login" : "Register"}
+          </Typography>
+          <Box component="form" noValidate autoComplete="off" sx={{ width: '100%' }}>
+            {mode === "Register" && (
+              <>
+                <TextField className="form-input" label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
+                <TextField className="form-input" label="Surname" variant="outlined" onChange={(e) => setSurname(e.target.value)} />
+                <TextField className="form-input" label="Username" variant="outlined" onChange={(e) => setUsername(e.target.value)} />
+              </>
+            )}
+            <TextField className="form-input" label="Email" type="email" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
+            <TextField className="form-input" label="Password" type="password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
+            
+            {/* Button with type="button" to prevent form submission */}
+            <button className="btn" type="button" onClick={loginregister}>
+              {mode === "Login" ? "Login" : "Register"}
+            </button>
+
+            <Typography variant="body2" align="center" className="toggle-button">
+              {mode === "Login" ? "Don't have an account?" : "Already have an account?"}{" "}
+              <span onClick={() => setMode(mode === "Login" ? "Register" : "Login")}>
+                {mode === "Login" ? "Register" : "Login"}
+              </span>
+            </Typography>
+          </Box>
+          {message && <Typography color="error" sx={{ mt: 2 }}>{message}</Typography>}
+        </div>
+      </div>
+
+      <div className="background-image" />
+    </div>
   );
 };
 export default LoginRegister;

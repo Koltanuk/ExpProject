@@ -14,4 +14,6 @@ router.get("/", verifyToken, groupController.getUserGroups);
 
 router.delete("/:groupId", verifyToken, groupController.deleteGroup);
 
+
+
 module.exports = router;

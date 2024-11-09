@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button, TextField, Typography, Box, List, ListItem, ListItemText } from "@mui/material";
 import { AuthContext } from "../App";
+import { useNavigate } from "react-router-dom";
+
 
 const GroupPage = () => {
   const [groups, setGroups] = useState([]);
@@ -10,6 +12,7 @@ const GroupPage = () => {
   const [selectedGroupId, setSelectedGroupId] = useState(null);
   const [selectedGroupName, setSelectedGroupName] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); 
 
   // Get token from localStorage
   const token = localStorage.getItem("authToken");
@@ -36,6 +39,10 @@ const GroupPage = () => {
       setMessage("Failed to load groups");
       console.log("Error fetching groups:", error); // Log error details
     }
+  };
+
+  const navigateToGroupExp = (groupId) => {
+    navigate(`/groups/${groupId}`);
   };
 
   // Function to create a new group
@@ -88,6 +95,10 @@ const GroupPage = () => {
 
   return (
     <Box sx={{ p: 2 }}>
+
+      <Button variant="outlined" onClick={() => navigate("/profile")} sx={{ mb: 2 }}>
+        Back to Profile
+      </Button>
       <Typography variant="h4">My Groups</Typography>
 
       {/* Create Group Section */}
@@ -130,7 +141,7 @@ const GroupPage = () => {
       {/* Display User's Groups */}
       <List>
         {groups.map((group) => (
-          <ListItem key={group.id}>
+          <ListItem key={group.id} button onClick={() => navigateToGroupExp(group.id)}>
             <ListItemText primary={group.name} secondary={`Created by user ${group.created_by}`} />
             <Button variant="outlined" onClick={() => deleteGroup(group.id)}>
               Delete

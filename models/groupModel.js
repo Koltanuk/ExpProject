@@ -98,4 +98,16 @@ module.exports = {
         throw error;
       }
     },
+
+    getGroupMembers: async (groupId) => {
+      try {
+        const members = await db("group_members")
+          .where({ group_id: groupId })
+          .select("user_id");
+        return members;
+      } catch (error) {
+        console.error("Error fetching group members:", error);
+        throw error;
+      }
+    },
   };
