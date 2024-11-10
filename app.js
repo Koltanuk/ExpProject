@@ -34,9 +34,9 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use(express.static(path.join(__dirname, "/client/build")));
+app.use(express.static(path.join(__dirname, "/client/")));
 
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.resolve(__dirname, "./client/", "index.html"));
 });
