@@ -83,6 +83,15 @@ module.exports = {
         const userId = req.user.id; // Authenticated user's ID
         console.log("groupId and user Id in deleting group controller", groupId, userId);
         // Check if the group exists and if the user is the creator
+        
+        const membersWithBalance = await groupModel.getMembersWithNonZeroBalance(groupId);
+
+        if (membersWithBalance.length > 0) {
+          return res.status(400).json({
+            message: "Cannot delete group. All member balances must be zero before deletion.",
+          });
+        }
+
         const group = await groupModel.getGroupById(groupId);
         if (!group) {
           return res.status(404).json({ message: "Group not found" });

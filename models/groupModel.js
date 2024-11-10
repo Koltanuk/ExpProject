@@ -110,4 +110,15 @@ module.exports = {
         throw error;
       }
     },
+
+    getMembersWithNonZeroBalance: async (groupId) => {
+      try {
+        return await db("group_members")
+          .where("group_id", groupId)
+          .andWhere("balance", "<>", 0);
+      } catch (error) {
+        throw error;
+      }
+    },
+
   };

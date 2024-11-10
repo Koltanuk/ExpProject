@@ -89,8 +89,12 @@ const GroupPage = () => {
       setMessage("Group deleted successfully");
       fetchGroups(); // Refresh group list
     } catch (error) {
-      setMessage("Failed to delete group");
-      console.log(error);
+      if (error.response && error.response.data.message) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage("Failed to delete group");
+      }
+      console.log("Error deleting group:", error);
     }
   };
 
@@ -143,7 +147,14 @@ const GroupPage = () => {
         {groups.map((group) => (
           <ListItem key={group.id} className="groups-list-item" button onClick={() => navigateToGroupExp(group.id)}>
             <ListItemText primary={group.name} secondary={`Created by user with id ${group.created_by}`} />
-            <Button variant="outlined" className="delete-button" onClick={() => deleteGroup(group.id)}>
+            <Button
+              variant="outlined"
+              className="delete-button"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevents navigation when delete button is clicked
+                deleteGroup(group.id);
+              }}
+            >
               Delete
             </Button>
           </ListItem>
