@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField, Box, Typography } from "@mui/material";
 import "../style/global.css";
-import "../style/LoginRegister.css";
+import "../style/loginRegister.css";
 
 import { AuthContext } from "../App";
 

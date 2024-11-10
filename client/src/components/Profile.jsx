@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, Box, TextField, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, ListItemText, Divider } from "@mui/material";
-import "../style/Profile.css";
+import "../style/profile.css";
 
 const Profile = (props) => {
     const token = localStorage.getItem("authToken");

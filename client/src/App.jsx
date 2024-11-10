@@ -1,6 +1,4 @@
 import "./style/global.css";
-import Dashboard from "./components/Dasbord";
-import Header from "./components/Header";
 import GroupPage from "./components/GroupPage";
 import LoginRegister from "./components/LoginRegister";
 import Profile from "./components/Profile";

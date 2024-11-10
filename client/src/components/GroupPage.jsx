@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button, TextField, Typography, Box, List, ListItem, ListItemText } from "@mui/material";
 import { AuthContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import "../style/GroupPage.css";
+import "../style/groupPage.css";
 
 
 const GroupPage = () => {
