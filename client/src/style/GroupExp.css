@@ -1,0 +1,91 @@
+/* Main container for the Group Expense page */
+.group-expense-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #e0f7e0; /* Slightly lighter green */
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Button container to align navigation buttons */
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .back-button, .delete-button, .adjust-button, .add-expense-button {
+    color: rgb(255, 255, 255) !important;
+    border-color: darkgreen;
+    background-color: #32723452;
+  }
+  
+  .back-button:hover, .delete-button:hover, .adjust-button:hover, .add-expense-button:hover {
+    background-color: #e0f7e0;
+    color: green !important;
+  }
+  
+  /* General container styling for each section */
+  .section-container {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    margin: 1rem 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styling */
+  .section-title {
+    color: darkgreen;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* List styling for members and expenses */
+  .member-list, .expense-list {
+    width: 100%;
+  }
+  
+  /* Member balance */
+  .member-list .member-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  /* Expense item styling */
+  .expense-list .expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .expense-list .expense-details {
+    flex: 1;
+  }
+  
+  /* Spacing and layout for add expense and adjustment sections */
+  .add-expense-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .adjust-balance-button {
+    margin-top: 1rem;
+  }
+  
+  .message-text {
+    margin-top: 1rem;
+    color: red;
+  }
+  

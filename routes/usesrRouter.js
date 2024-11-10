@@ -14,6 +14,8 @@ router.get("/auth", verifyToken, userController.verifyAuth);
 router.get("/profile", verifyToken, userController.getUserProfile);
 router.get("/email/:email", verifyToken, userController.getUserByEmail);
 router.get("/username/:username", verifyToken, userController.getUserByUsername)
+router.put("/update", verifyToken, userController.updateUserProfile);
+
 
 
 

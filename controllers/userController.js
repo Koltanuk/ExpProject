@@ -145,6 +145,25 @@ module.exports = {
       } catch (error) {
         res.status(500).json({ message: "Error retrieving profile information", error });
       }
-  },    
+  },
+  
+  updateUserProfile: async (req, res) => {
+    try {
+      const userId = req.user.id; // Get user ID from the verified token
+      const { name, surname, email, username } = req.body; // Get updated details from request body
+      console.log("User ID from token:", userId, "other details: ", name, surname, email, username);
+      const updatedUser = await userModel.updateUser(userId, { name, surname, email, username });
+  
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found or update failed" });
+      }
+  
+      res.status(200).json({ message: "Profile updated successfully", user: updatedUser });
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      res.status(500).json({ message: "Error updating profile information", error });
+    }
+  },
+  
 };
 

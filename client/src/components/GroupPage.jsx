@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Button, TextField, Typography, Box, List, ListItem, ListItemText } from "@mui/material";
 import { AuthContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import "../style/GroupPage.css";
 
 
 const GroupPage = () => {
@@ -94,62 +95,61 @@ const GroupPage = () => {
   };
 
   return (
-    <Box sx={{ p: 2 }}>
-
-      <Button variant="outlined" onClick={() => navigate("/profile")} sx={{ mb: 2 }}>
+    <div className="groups-page-container">
+      <Button variant="outlined" onClick={() => navigate("/profile")} className="back-button" sx={{ mb: 2 }}>
         Back to Profile
       </Button>
       <Typography variant="h4">My Groups</Typography>
 
       {/* Create Group Section */}
-      <Box component="form" sx={{ m: 1 }} noValidate autoComplete="off">
+      <div className="group-form-container">
         <TextField
-          sx={{ m: 1 }}
+          className="group-input"
           label="Group Name"
           variant="outlined"
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
         />
-        <Button variant="contained" onClick={createGroup}>
+        <button className="btn-create" onClick={createGroup}>
           Create Group
-        </Button>
-      </Box>
+        </button>
+      </div>
 
       {/* Add Member Section */}
-      <Box component="form" sx={{ m: 1 }} noValidate autoComplete="off">
+      <div className="add-member-container">
         <TextField
-          sx={{ m: 1 }}
+          className="group-input"
           label="Member Email"
           variant="outlined"
           value={newMemberEmail}
           onChange={(e) => setNewMemberEmail(e.target.value)}
         />
         <TextField
-          sx={{ m: 1 }}
-          label="Group name"
+          className="group-input"
+          label="Group Name"
           variant="outlined"
           value={selectedGroupName}
           onChange={(e) => setSelectedGroupName(e.target.value)}
         />
-        <Button variant="contained" onClick={addMemberToGroup}>
+        <button className="btn-add-member" onClick={addMemberToGroup}>
           Add Member
-        </Button>
-      </Box>
+        </button>
+      </div>
 
-      {message && <Typography variant="body2">{message}</Typography>}
+      {message && <Typography variant="body2" className="message-text">{message}</Typography>}
 
       {/* Display User's Groups */}
-      <List>
+      <List className="groups-list">
         {groups.map((group) => (
-          <ListItem key={group.id} button onClick={() => navigateToGroupExp(group.id)}>
-            <ListItemText primary={group.name} secondary={`Created by user ${group.created_by}`} />
-            <Button variant="outlined" onClick={() => deleteGroup(group.id)}>
+          <ListItem key={group.id} className="groups-list-item" button onClick={() => navigateToGroupExp(group.id)}>
+            <ListItemText primary={group.name} secondary={`Created by user with id ${group.created_by}`} />
+            <Button variant="outlined" className="delete-button" onClick={() => deleteGroup(group.id)}>
               Delete
             </Button>
           </ListItem>
         ))}
       </List>
-    </Box>
+    </div>
   );
 };
 

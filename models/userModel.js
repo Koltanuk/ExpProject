@@ -80,4 +80,16 @@ module.exports = {
     }
   },
   
+  updateUser: async (id, userDetails) => {
+    try {
+      const [updatedUser] = await db("authusers")
+        .where({ id })
+        .update(userDetails)
+        .returning(["id", "name", "surname", "email", "username"]);
+      return updatedUser;
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      throw error;
+    }
+  },
 };
