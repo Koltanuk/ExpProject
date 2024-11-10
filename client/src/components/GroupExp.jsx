@@ -21,6 +21,8 @@ const GroupExp = () => {
   const [selectedPayerId, setSelectedPayerId] = useState("");
   const [conversionAmount, setConversionAmount] = useState(0);
   const [currency, setCurrency] = useState("USD");
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false); 
+  const [expenseToDelete, setExpenseToDelete] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -132,11 +134,17 @@ const GroupExp = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("Expense deleted successfully");
+      setConfirmDeleteOpen(false);
       fetchGroupDetails(); // Refresh group details after deleting an expense
     } catch (error) {
       setMessage("Failed to delete expense");
       console.log("Error deleting expense:", error);
     }
+  };
+
+  const handleDeleteClick = (expenseId) => {
+    setExpenseToDelete(expenseId);
+    setConfirmDeleteOpen(true);
   };
 
   return (
@@ -214,11 +222,28 @@ const GroupExp = () => {
                       <span key={name}> {name} - {percentage}%</span>
                     ))}
                   </Typography>
-                  <Button variant="outlined" className="delete-button" onClick={() => deleteExpense(expense.id)}>Delete</Button>
+                  <Button
+                    variant="outlined"
+                    className="delete-button"
+                    onClick={() => handleDeleteClick(expense.id)}
+                  >
+                    Delete
+                  </Button>
                 </ListItem>
               ))}
             </List>
           </div>
+
+          <Dialog open={confirmDeleteOpen} onClose={() => setConfirmDeleteOpen(false)}>
+            <DialogTitle>Confirm Delete</DialogTitle>
+            <DialogContent>
+              <Typography>Are you sure you want to delete this expense?</Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setConfirmDeleteOpen(false)}>Cancel</Button>
+              <Button variant="contained" color="error" onClick={deleteExpense}>Delete</Button>
+            </DialogActions>
+          </Dialog>
 
           {/* Add Expense Section */}
           <div className="section-container">
