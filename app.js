@@ -1,6 +1,7 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const path = require("path");
 const userRouter = require('./routes/usesrRouter');
 const groupRoutes = require("./routes/groupRoutes");
 const groupExpRoutes = require("./routes/groupExpRoutes");
@@ -33,13 +34,9 @@ app.use((req, res, next) => {
     next();
   });
 
-async function testConnection(){
-    try{
-        const data = await db.raw('select version()');
-        console.log(data.rows);
-    } catch(error){
-    
-    }
-}
+app.use(express.static(path.join(__dirname, "/client/build")));
 
-testConnection();
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
