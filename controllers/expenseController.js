@@ -1,5 +1,6 @@
 const expenseModel = require("../models/expenseModel");
 const groupModel = require("../models/groupModel");
+const convertCurrency = require("../middlewares/currencyConverter");
 
 
 module.exports = {
@@ -88,7 +89,18 @@ module.exports = {
         }
     },
 
-    
+    convertExpenseAmount : async (req, res) => {
+      const { amount, fromCurrency, toCurrency } = req.body;
+      console.log("in controller convertcur :", amount, fromCurrency, toCurrency)
+      try {
+        console.log("in controller convertcur2")
+        const convertedAmount = await convertCurrency(amount, fromCurrency, toCurrency);
+        console.log("in controller convertcur3")
+        res.status(200).json({ convertedAmount, toCurrency });
+      } catch (error) {
+        res.status(500).json({ message: "Currency conversion failed", error: error.message });
+      }
+    },
 
 
 

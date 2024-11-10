@@ -4,6 +4,7 @@ import { Box, Typography, List, ListItem, TextField, Button, Select, MenuItem, F
 import { AuthContext } from "../App";
 import axios from "axios";
 import "../style/GroupExp.css";
+import CurrencyConverter from "./CurrencyConverter"
 
 const GroupExp = () => {
   const { groupId } = useParams(); // Get groupId from the URL
@@ -18,6 +19,8 @@ const GroupExp = () => {
   const [adjustAmount, setAdjustAmount] = useState(0);
   const [selectedPayeeId, setSelectedPayeeId] = useState("");
   const [selectedPayerId, setSelectedPayerId] = useState("");
+  const [conversionAmount, setConversionAmount] = useState(0);
+  const [currency, setCurrency] = useState("USD");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -250,12 +253,34 @@ const GroupExp = () => {
 
             <Button variant="contained" onClick={addExpense} sx={{ mt: 2 }}>Add Expense</Button>
           </div>
-
+          
           {message && <Typography className="message-text">{message}</Typography>}
         </>
       ) : (
         <Typography>Loading group details...</Typography>
       )}
+
+<Box sx={{ mt: 4, p: 3, backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
+        <Typography variant="h6" className="section-title">Currency Converter</Typography>
+        <TextField
+          label="Amount"
+          type="number"
+          value={conversionAmount}
+          onChange={(e) => setConversionAmount(e.target.value)}
+          sx={{ mb: 2, width: '100%' }}
+        />
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <InputLabel>Currency</InputLabel>
+          <Select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+            <MenuItem value="USD">USD</MenuItem>
+            <MenuItem value="EUR">EUR</MenuItem>
+            <MenuItem value="GBP">GBP</MenuItem>
+            <MenuItem value="JPY">JPY</MenuItem>
+            {/* Add more currencies as needed */}
+          </Select>
+        </FormControl>
+        <CurrencyConverter amount={conversionAmount} fromCurrency={currency} />
+      </Box>
     </div>
   );
 };

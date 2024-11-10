@@ -22,6 +22,10 @@
     background-color: #32723452;
   }
   
+  .add-expense-button {
+    position: center;
+  }
+
   .back-button:hover, .delete-button:hover, .adjust-button:hover, .add-expense-button:hover {
     background-color: #e0f7e0;
     color: green !important;
