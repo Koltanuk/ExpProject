@@ -19,10 +19,10 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization", "x-access-token"]
   }));
 
+const {PORT} = process.env;
 
-
-app.listen( process.env.PORT || 5000, () => {
-    console.log(`run on ${process.env.PORT || 5000}`);
+app.listen( PORT || 5000, () => {
+    console.log(`run on ${PORT || 5000}`);
     
 })
 
